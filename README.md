@@ -1,5 +1,37 @@
 # decrypting-ciphertexts
 
+## Let us see what goes wrong when a stream cipher key is used more than once. Below are eleven hex-encoded ciphertexts that are the result of encrypting eleven plaintexts with a stream cipher, all with the same stream cipher key. Your goal is to decrypt the last ciphertext, and submit the secret message within it as solution.
+
+## Hint: XOR the ciphertexts together, and consider what happens when a space is XORed with a character in [a-zA-Z].
+
+
+The whole idea of finding the decrypted text and secret message solely based on
+analyzing and keep guessing until we get any part of the plaintext. Then further
+using the key to decrypt it.
+
+A crucial technique that helped to successfully decrypt is “Crib dragging”, which
+is a known plaintext attack where if you can guess or know part of a plain text
+message you can begin to decrypt other encrypted messages by dragging a
+XOR of the known plain text over two or more messages
+This is exactly what I did. Initially started my crib with “secret message”; this was
+a smart guess, and luckily, it worked.
+This was the first english statement i got → S class do not
+And from here I kept on adding sensible words to the crib.
+
+Another essential point was the relation between the ciphertexts. After taking xor
+and converting it to ascii, there was somewhat of an obvious relation between the
+ciphertexts. Ciphertext 1 and 11, 6 and 11, 1 and 2 are some of the ciphertexts
+that I used concurrently. This means that the result of using crib on 1 and 11 is
+also used on 6 and 11.
+
+Moving on, all of this was a lot easier because the same key was used on all the
+ciphertexts. Taking XOR of any two ciphertexts, cancels out the key leaving us
+with the XOR of two plaintexts. Further, all the process of crib dragging was
+applied.
+
+As far as the hint goes, taking XOR of space (0x20) with any alphabet, changes
+the case of the letter. For example if ‘a’ is XORed with space it will give ‘A’.
+Similarly, if ‘A’ is XORed with space it will give ‘a’.
 
 
 Ciphertext 01
